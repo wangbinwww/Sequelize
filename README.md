@@ -123,11 +123,12 @@ const AaronTest = sequelize.define('project', {
 | isCreditCard   | 检查是有效的信用卡         | 布尔   |
 
 > CRUD
-> CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Update)和删除(Delete)几个单词的首字母简写。crud 主要被用在描述软件系统中数据库或者持久层的基本操作功能。
+
+CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Update)和删除(Delete)几个单词的首字母简写。crud 主要被用在描述软件系统中数据库或者持久层的基本操作功能。
 
 > 创建
-> 创建数据的方法有很多种，这里简单的介绍一些常用的：
 
+创建数据的方法有很多种，这里简单的介绍一些常用的：
 先创建数据实例，然后调用实例的 save 方法，完成数据存储。
 
 ```groovy
