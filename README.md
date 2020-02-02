@@ -62,7 +62,7 @@ const AaronTest = sequelize.define('project', {
 | ENUM     | 枚举类型,Sequelize.ENUM()                                                             |
 | ARRAY    | 数组类型，仅 Postgres 适用,Sequelize.ARRAY()                                          |
 
-> model 进行二次设置
+> Model 进行二次设置
 
 - timestamps:不要添加时间戳属性 (updatedAt, createdAt)
 - paranoid:paranoid 属性只在启用 timestamps 时适用,不从数据库中删除数据，而只是增加一个 deletedAt 标识当前时间,我们常说的逻辑删除
@@ -72,6 +72,55 @@ const AaronTest = sequelize.define('project', {
 - createdAt：不想使用 createdAt
 - updatedAt：想 updatedAt 的实际名为'\*'
 - deletedAt: 要将 deletedAt 设置为 destroyTime (注意要启用 paranoid)
+
+> Model 附加属性
+
+- autoIncrement：是否自增
+- references：通过 references 选项可以创建外键
+- allowNull：设置 allowNull 选项为 false 后，会为列添加 NOT NULL 非空限制
+- defaultValue：设置默认值
+- type：字段类型
+- unique：添加唯一（unique）约束后插入重复值会报错，unique 属性可以是 boolean 或 string 类型
+- primaryKey：设置为主键
+- comment：字段描述
+- field：指定数据库中的字段名
+
+> Model validate 属性
+
+| 字段           | 说明                       | 值类型 |
+| -------------- | -------------------------- | ------ |
+| is             | 存储值必须满足正则         | 正则   |
+| not            | 除正则之外的值             | 布尔   |
+| isEmail        | 是否为邮箱                 | 布尔   |
+| isUrl          | 检查 Url 格式              | 布尔   |
+| isIP           | 检查 IPv4 或 IPv6 格式     | 布尔   |
+| isIPv4         | 检查 IPv4                  | 布尔   |
+| isIPv6         | 检查 IPv6                  | 布尔   |
+| isAlpha        | 不能使用字母               | 布尔   |
+| isAlphanumeric | 只允许字母数字字符         | 布尔   |
+| isNumeric      | 只能使用数字               | 布尔   |
+| isInt          | 只能是整数                 | 布尔   |
+| isFloat        | 只能是浮点数               | 布尔   |
+| isDecimal      | 检查数字                   | 布尔   |
+| isLowercase    | 检查小写字母               | 布尔   |
+| isUppercase    | 检查大写字母               | 布尔   |
+| notNull        | 不允许 null                | 布尔   |
+| isNull         | 只能为 null                | 布尔   |
+| notEmpty       | 不能空字符串               | 布尔   |
+| equals         | 只能使用指定值             | 字符串 |
+| contains       | 必须包含子字符串           | 字符串 |
+| notIn          | 不能是数组中的任意一个值   | 数组   |
+| isIn           | 只能是数组中的任意一个值   | 数组   |
+| notContains    | 不能包含子字符串           | 字符串 |
+| len            | 值的长度必在 2 和 10 之间  | 数组   |
+| isUUID         | 只能是 UUID                | 数字   |
+| isDate         | 只能是日期字符串           | 布尔   |
+| isAfter        | 只能使用指定日期之后的时间 | 字符串 |
+| isBefore:      | 只能使用指定日期之前的时间 | 字符串 |
+| max            | 允许的最大值               | 数字   |
+| min            | 允许的最小值               | 数字   |
+| isArray        | 不能使用数组               | 布尔   |
+| isCreditCard   | 检查是有效的信用卡         | 布尔   |
 
 ## 许可协议
 
