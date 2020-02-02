@@ -132,6 +132,8 @@ CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Upda
 先创建数据实例，然后调用实例的 save 方法，完成数据存储。
 
 ```groovy
+//第一种：
+//save方法
   const Aaron = AaronTest.build({
       'title': `后端 | ${Math.random()}`,
       'description': '技术部'
@@ -143,11 +145,55 @@ CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Upda
       //  失败
       console.log(error)
   })
+
+//第二种：
+//通过静态create方法
+  const user = AaronTest.create({
+    'title': `前端 | ${Math.random()}`,
+    'description': '网络部'
+}).then(function (result) {
+    //  成功
+    console.log(result)
+}).catch(function (error) {
+    //  失败
+    console.log(error)
+});
 ```
 
 > 读取(Read)
 
 ```groovy
+
+  AaronTest.findAll({
+      where: {
+          description: '网络部'
+      },
+      limit: 10, //  查询多少条
+      offset: 0, //  查询开始位置
+      raw: true
+  }).then(function (result) {
+      // success
+      console.log(result)
+  }).catch(function (error) {
+      // error
+      console.log(error)
+  });
+  //通过上述方法创建的数据可以直接作为返回结果返回给前台，如果想对其操作需要在参数中添加row:true属性
+  //添加row:true返回的则是一个没有被包装过的数组了。在项目过程中需要查询一下当前所查询的数据共有多少条返回给前端。
+
+  AaronTest.count({
+      where: {
+          description: '网络部'
+      }
+  }).then().then(function (result) {
+      // success
+      console.log(result)
+  }).catch(function (error) {
+      // error
+      console.log(error)
+  });
+  //通过上面的方法则可以查询到总数
+
   AaronTest.findAndCountAll({
       where: {
           description: '网络部'
@@ -168,6 +214,58 @@ CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Upda
 
 ```
 
+- 查询单条数据
+
+```groovy
+  AaronTest.findOne({
+      where: {
+          id: 6
+      },
+      raw: true,
+      attributes: ["id", "title"]
+  }).then((result) => {
+      console.log(result)
+  }).catch((error) => {
+      console.log(error)
+  })
+```
+
+> 更新(Update)
+
+```groovy
+  AaronTest.update({
+      description: '前端部',
+      title: `前端 | ${Math.random()}`
+  }, {
+      where: {
+          description: "网络部"
+      }
+  }).then((result) => {
+      console.log(result)
+  }).catch((error) => {
+      console.log(error)
+  })
+  //修改数据可以直接调用静态的update方法，通过where条件查询，对其搜索到的数据进行查询，并对查询到的数据进行更改。
+  //该方法修改所有查询的到的数据，返回结果为数组形式，数据只有一个值，也就是数组的第0项，则是N条数据修改成功。
+
+```
+
+> 删除(Delete)
+
+```groovy
+AaronTest.destroy({
+    where: {
+        description: "UI部",
+    }
+}).then(function (result) {
+    console.log(result)
+}).catch(function (error) {
+    console.log(error)
+});
+//删除操作通过destroy方法，同样也是通过where条件查询，对所查询数据进行删除。
+//当删除成功后，返回结果为Number，删除多少条数据，如果没有删除则会返回0。此方法属于物理删除，删除后无法进行恢复。
+```
+
 ## 许可协议
 
 - [署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans)
@@ -184,3 +282,7 @@ CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Upda
 - Github: <https://github.com/wangbinwww/Sequelize>
 
 ---
+
+```
+
+```
