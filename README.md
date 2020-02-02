@@ -1,14 +1,14 @@
-###### Sequelize 5.x 练习工程
+## Sequelize 5.x 练习工程
 
 参考原文:https://segmentfault.com/a/1190000019760817
 
 根据文章的步骤一步一步学习使用 Sequelize 链接 mssql 的功能.
 
-###### 准备工作
+## 准备工作
 
 1.  使用 'npm install' 命令初始化项目
 
-###### 功能
+## 功能
 
 const AaronTest = sequelize.define('project', {
 title: Sequelize.STRING,
@@ -16,10 +16,15 @@ description: Sequelize.TEXT
 },{
 timestamps: false
 })
+
 类型 说明
+
 STRING 将字段指定为变长字符串类型，默认长度为 255。Sequelize.STRING(64)
+
 CHAR 将字段指定为定长字符串类型，默认长度为 255。Sequelize.CHAR(64)
+
 TEXT 将字段指定为(无)有限长度的文本列。可用长度：tiny, medium, long,Sequelize.TEXT('tiny')
+
 INTEGER 32 位整型，可用属性：UNSIGNED,ZEROFILL，Sequelize.INTEGER('UNSIGNED')
 BOOLEAN 小数，接受一个或两个参数表示精度，Sequelize.BOOLEAN()
 TIME 指定为时间类型列，Sequelize.TIME()
