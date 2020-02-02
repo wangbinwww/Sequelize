@@ -32,20 +32,35 @@ by [Well-BoB](https://github.com/wangbinwww/Sequelize)
 
 ## 其它文档
 
-> 建议使用 GitBook 版本
+> 常用类型
+
+```groovy
+// app.js
+const AaronTest = sequelize.define('project', {
+  title: Sequelize.STRING,
+  description: Sequelize.TEXT
+},{
+  timestamps: false
+})
+```
 
 | 类型        | 说明                                                               |
 | ----------- | ------------------------------------------------------------------ |
-| STRING | 将字段指定为变长字符串类型，默认长度为 255。Sequelize.STRING(64)|
-| CHAR  | 将字段指定为定长字符串类型，默认长度为 255。Sequelize.CHAR(64) |
+|STRING| 将字段指定为变长字符串类型，默认长度为 255。Sequelize.STRING(64)|
+|CHAR| 将字段指定为定长字符串类型，默认长度为 255。Sequelize.CHAR(64)|
 |TEXT|将字段指定为(无)有限长度的文本列。可用长度：tiny, medium, long,Sequelize.TEXT('tiny')|
-|||
-|||
-|||
-|||
-|||
-|||
-|||
+|INTEGER|32 位整型，可用属性：UNSIGNED,ZEROFILL，Sequelize.INTEGER('UNSIGNED')|
+|BOOLEAN|小数，接受一个或两个参数表示精度，Sequelize.BOOLEAN()|
+|TIME|指定为时间类型列，Sequelize.TIME()|
+|DATE|指定为日期时间类型列,Sequelize.DATE()|
+|DATEONLY|指定为日期类型列,Sequelize.DATEONLY()|
+|HSTORE|指定为键/值类型列，仅 Postgres 适用,Sequelize.HSTORE()|
+|JSON|指定为 JSON 字符串类型列，仅 Postgres 适用,Sequelize.JSON()|
+|JSONB|指定为预处理的 JSON 数据列，仅 Postgres 适用,Sequelize.JSONB()|
+|NOW|一个表示当前时间戳的默认值,Sequelize.NOW()|
+|UUID|UUID 类型列，其默认值可以为 UUIDV1 或 UUIDV4，Sequelize.UUID()|
+|ENUM|枚举类型,Sequelize.ENUM()|
+|ARRAY|数组类型，仅 Postgres 适用,Sequelize.ARRAY()|
 
 ## 许可协议
 
