@@ -1,11 +1,12 @@
 # Sequelize 学习参考
 
 参考原文:https://segmentfault.com/a/1190000019760817
+
 根据文章的步骤一步一步学习使用 Sequelize 链接 mssql 的功能.
 
 by [Well-BoB](http:\www.sispower.com)
 
-**最新版本: v1.0.5 2019.10.30**
+**最新版本: v1 2020.02.02**
 
 ## 文档地址
 
