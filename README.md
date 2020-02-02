@@ -126,23 +126,46 @@ const AaronTest = sequelize.define('project', {
 
 CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Update)和删除(Delete)几个单词的首字母简写。crud 主要被用在描述软件系统中数据库或者持久层的基本操作功能。
 
-> 创建
+> 增加(Create)
 
 创建数据的方法有很多种，这里简单的介绍一些常用的：
 先创建数据实例，然后调用实例的 save 方法，完成数据存储。
 
 ```groovy
-        const Aaron = AaronTest.build({
-          'title': `后端 | ${Math.random()}`,
-          'description': '技术部'
-        });
-        Aaron.save().then((result) => {
-            //  成功
-            console.log(result)
-        }).catch((error) => {
-            //  失败
-            console.log(error)
-        })
+  const Aaron = AaronTest.build({
+      'title': `后端 | ${Math.random()}`,
+      'description': '技术部'
+  });
+  Aaron.save().then((result) => {
+      //  成功
+      console.log(result)
+  }).catch((error) => {
+      //  失败
+      console.log(error)
+  })
+```
+
+> 读取(Read)
+
+```groovy
+  AaronTest.findAndCountAll({
+      where: {
+          description: '网络部'
+      },
+      limit: 10,
+      offset: 0,
+      raw: true,
+      attributes: ["id", "title"] //  需要查询出的字段
+  }).then(function (result) {
+      // success
+      console.log(result)
+  }).catch(function (error) {
+      // error
+      console.log(error)
+  });
+  //添加row:true返回的则是一个没有被包装过的数组了。在项目过程中需要查询一下当前所查询的数据共有多少条返回给前端。
+  //通过上面的方法则可以查询到总数以及条件范围内的数据，一举两得。查询结果返回的是一个json对象，其包括cont和rows两个属性，分别是总数和数据。很舒服有没有。
+
 ```
 
 ## 许可协议
