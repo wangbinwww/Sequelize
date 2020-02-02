@@ -26,9 +26,7 @@ const sequelize = new Sequelize('TestDB', 'sa', 'Icon2019', mssqlConfig);
 //第二步 建立模型与表产生映射
 //----------------------
 //定义模型结构
-//属性
 const TableStructure = {
-    //Sequelize 在数据库中期望一个名为 users 的表,其中包含 firstName 和 lastName 字段. 默认情况下,表名自动复数(在当下使用inflection 库来执行此操作).
     ID: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -39,10 +37,8 @@ const TableStructure = {
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
 }
-//参数
+
 const TableSequelize = {
-    //Sequelize 还默认为每个模型定义了字段id(主键),createdAt和updatedAt. 当然也可以更改此行为timestamps: false,
-    //通过使用 freezeTableName:true 参数可以为特定模型停止此行为
     timestamps: false,
     freezeTableName: true, //禁止修改表名字
     ID: {
@@ -75,16 +71,6 @@ const TableSequelize = {
 //方法接收三个参数，第一个参数为表名称，第二个为所需要创建的数据库字段，第三个参数是相关表配置。
 const AaronTest = sequelize.define('User', TableStructure, TableSequelize)
 
-//测试链接
-sequelize
-    .authenticate()
-    .then(() => {
-        console.log('Connection has been established successfully.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
-
 //条件查询数据库
 AaronTest.findAndCountAll({
         where: {
@@ -105,6 +91,7 @@ AaronTest.findAndCountAll({
         console.log(error);
         //sequelize.close()
     });
+
 //查询单条数据
 AaronTest.findOne({
     where: {
@@ -117,23 +104,3 @@ AaronTest.findOne({
 }).catch((error) => {
     console.log(error)
 })
-
-
-//将模型与数据库同步
-//如果你希望 Sequelize 根据你的模型定义自动创建表(或根据需要进行修改),你可以使用sync方法,如下所示:
-// 注意:如果表已经存在,使用`force:true`将删除该表
-AaronTest.sync();
-
-AaronTest.sync({
-    force: true
-});
-
-AaronTest.sync({
-    force: true
-}).then(() => {
-    // 现在数据库中的 `users` 表对应于模型定义
-    return AaronTest.create({
-        firstName: 'John',
-        lastName: 'Hancock'
-    });
-});
