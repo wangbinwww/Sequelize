@@ -1,6 +1,8 @@
 # Sequelize 学习参考
 
-参考原文:https://segmentfault.com/a/1190000019760817
+参考原文:
+**https://segmentfault.com/a/1190000019760817**
+**https://github.com/demopark/sequelize-docs-Zh-CN**
 
 根据文章的步骤一步一步学习使用 Sequelize 链接 mssql 的功能.
 
