@@ -214,7 +214,7 @@ CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Upda
 
 ```
 
-- 查询单条数据
+**查询单条数据**
 
 ```groovy
   AaronTest.findOne({
@@ -266,6 +266,139 @@ AaronTest.destroy({
 //当删除成功后，返回结果为Number，删除多少条数据，如果没有删除则会返回0。此方法属于物理删除，删除后无法进行恢复。
 ```
 
+> 查询参数
+
+CRUD 操作过程中，都少不了的就是查询，细心的应该可以看的出，上面的例子中查询的时候多多少少的对其进行了一些小的改动。Sequelize 中有两种查询：使用 Model(模型)中的方法查询和使用 sequelize.query()进行基于 SQL 语句的原始查询。上面用到的是 Model 查询方式，接下来就详细的介绍一些常用的参数以及其代表的意义。
+
+> attributes - 属性与查询字段
+
+查询时，如果只需要查询模型的部分属性，可以在通过在查询选项中指定 attributes 实现。该选项是一个数组参数，在数组中指定要查询的属性即可，这个字段在上面进行查询的时候已经使用过了。
+
+```groovy
+//查询属性（字段）可以通过传入一个嵌套数据进行重命名，这里需要强调一下重命名所指的是对查询出的数据键值进行重命名处理，而不是更改数据表中的字段名称。
+AaronTest.findOne({
+    where: {
+        id: 2
+    },
+    attributes: ["id", ["title", "t"]],
+    raw: true
+}).then((result) => {
+    console.log(result)
+}).catch((error) => {
+    console.log(error)
+})
+//  注意这里t ↓
+//  { id: 2, t: '前端 | 0.8765218593370694' }
+```
+
+> where - 指定筛选条件
+
+上面的那么多例子中 where 出现的次数最多了，除了增加数据不需要，其他的都需要用到 where 条件，可以指定一个 where 选项以指定筛选条件，where 是一个包含属性/值对对象，sequelize 会根据此对象生产查询语句的筛选条件。
+
+where 的基础用法也就向上面那样，针对某些特定的条件进行查询处理。
+
+```groovy
+AaronTest.findOne({
+    where: {
+        id: 2
+    },
+    attributes: {
+        exclude: ['id']
+    },
+    raw: true
+}).then((result) => {
+    console.log(result)
+}).catch((error) => {
+    console.log(error)
+})
+```
+
+就像上面那样简单的查询无法满足所有的业务需求，Sequelize 还提供了操作符以满足更多的查询条件，常用的操作符如下：
+
+```groovy
+$and: {a: 5}                    // AND (a = 5)
+$or: [{a: 5}, {a: 6}]           // (a = 5 OR a = 6)
+$gt: 6,                         // > 6
+$gte: 6,                        // >= 6
+$lt: 10,                        // < 10
+$lte: 10,                       // <= 10
+$ne: 20,                        // != 20
+$not: true,                     // IS NOT TRUE
+$between: [6, 10],              // BETWEEN 6 AND 10
+$notBetween: [11, 15],          // NOT BETWEEN 11 AND 15
+$in: [1, 2],                    // IN [1, 2]
+$notIn: [1, 2],                 // NOT IN [1, 2]
+$like: '%hat',                  // LIKE '%hat'
+$notLike: '%hat'                // NOT LIKE '%hat'
+$iLike: '%hat'                  // 包含'%hat' (case insensitive) (PG only)
+$notILike: '%hat'               // 不包含'%hat'  (PG only)
+$like: { $any: ['cat', 'hat']}  // 像任何数组['cat'， 'hat'] -也适用于iLike和notLike
+```
+
+> limit/offset - 分页与限制返回结果数
+
+在进行列表查询时，不能把查询道德所有数据全部返回出去，需要对数据进行分页处理。
+
+```groovy
+// 获取 10 条数据（实例）
+AaronTest.findAll({ limit: 10 })
+// 跳过 8 条数据（实例）
+AaronTest.findAll({ offset: 8 })
+// 跳过 5 条数据并获取其后的 5 条数据（实例）
+AaronTest.findAll({ offset: 5, limit: 5 })
+```
+
+> 查询排序
+
+order 选项用于查询结果的排序数据。排序时应该传入一个包含属性-排序方向的元组/数组，以保证正确的转义：
+
+```groovy
+AaronTest.findAll({
+    order: [
+        // 转义 username 并对查询结果按 DESC 方向排序
+        ['username', 'DESC'],
+        // 按 max(age) 排序
+        sequelize.fn('max', sequelize.col('age')),
+        // 按 max(age) DESC 排序
+        [sequelize.fn('max', sequelize.col('age')), 'DESC'],
+        // 按 otherfunction(`col1`, 12, 'lalala') DESC 排序
+        [sequelize.fn('otherfunction', sequelize.col('col1'), 12, 'lalala'), 'DESC'],
+        // 按相关联的User 模型的 name 属性排序
+        [User, 'name', 'DESC'],
+        // 按相关联的User 模型的 name 属性排序并将模型起别名为 Friend
+        [{
+            model: User,
+            as: 'Friend'
+        }, 'name', 'DESC'],
+        // 按相关联的User 模型的嵌套关联的 Company 模型的 name 属性排序
+        [User, Company, 'name', 'DESC'],
+    ]
+    // 以下所有声明方式都会视为字面量，应该小心使用
+    order: 'convert(user_name using gbk)'
+    order: 'username DESC'
+    order: sequelize.literal('convert(user_name using gbk)')
+})
+```
+
+> SQL 语句查询
+
+原始查询中有两种替换查询参数的方法，以:开头的参数的形式替换或以不命名以?替换。在选项对象中传递参数：
+
+- 如果传递一个数组，? 会按数组的顺序被依次替换
+- 巢传递一个对象，:key 将会用对象的键替换。如果对象中未找到指定键，则会引发异常（反之亦然）
+
+```groovy
+//  这里是sequelize，并不是model
+sequelize.query('SELECT * FROM projects WHERE id = ?', {
+    replacements: ['active'],
+    type: sequelize.QueryTypes.SELECT
+}).then((result) => {
+    console.log(result)
+}).catch((error) => {
+    console.log(error)
+})
+```
+
 ## 许可协议
 
 - [署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans)
@@ -282,6 +415,10 @@ AaronTest.destroy({
 - Github: <https://github.com/wangbinwww/Sequelize>
 
 ---
+
+```
+
+```
 
 ```
 
