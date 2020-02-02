@@ -34,10 +34,18 @@ by [Well-BoB](https://github.com/wangbinwww/Sequelize)
 
 > 建议使用 GitBook 版本
 
-| 文档        | 连接                                                               |
+| 类型        | 说明                                                               |
 | ----------- | ------------------------------------------------------------------ |
-| 中文版 HTML | [链接](http://mcxiaoke.github.io/mqtt/protocol/MQTT-3.1.1-CN.html) |
-| 中文版 PDF  | [链接](http://mcxiaoke.github.io/mqtt/protocol/MQTT-3.1.1-CN.pdf)  |
+| STRING | 将字段指定为变长字符串类型，默认长度为 255。Sequelize.STRING(64)|
+| CHAR  | 将字段指定为定长字符串类型，默认长度为 255。Sequelize.CHAR(64) |
+|TEXT|将字段指定为(无)有限长度的文本列。可用长度：tiny, medium, long,Sequelize.TEXT('tiny')|
+|||
+|||
+|||
+|||
+|||
+|||
+|||
 
 ## 许可协议
 
