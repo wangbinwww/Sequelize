@@ -108,7 +108,7 @@ UserTest.findAndCountAll({
 //查询单条数据
 UserTest.findOne({
     where: {
-        Name: '刘康'
+        ID: 8
     },
     raw: true,
     attributes: ["id", "Name"]
