@@ -44,23 +44,23 @@ const AaronTest = sequelize.define('project', {
 })
 ```
 
-| 类型     | 说明                                                                                  |
-| -------- | ------------------------------------------------------------------------------------- |
-| STRING   | 将字段指定为变长字符串类型，默认长度为 255。Sequelize.STRING(64)                      |
-| CHAR     | 将字段指定为定长字符串类型，默认长度为 255。Sequelize.CHAR(64)                        |
-| TEXT     | 将字段指定为(无)有限长度的文本列。可用长度：tiny, medium, long,Sequelize.TEXT('tiny') |
-| INTEGER  | 32 位整型，可用属性：UNSIGNED,ZEROFILL，Sequelize.INTEGER('UNSIGNED')                 |
-| BOOLEAN  | 小数，接受一个或两个参数表示精度，Sequelize.BOOLEAN()                                 |
-| TIME     | 指定为时间类型列，Sequelize.TIME()                                                    |
-| DATE     | 指定为日期时间类型列,Sequelize.DATE()                                                 |
-| DATEONLY | 指定为日期类型列,Sequelize.DATEONLY()                                                 |
-| HSTORE   | 指定为键/值类型列，仅 Postgres 适用,Sequelize.HSTORE()                                |
-| JSON     | 指定为 JSON 字符串类型列，仅 Postgres 适用,Sequelize.JSON()                           |
-| JSONB    | 指定为预处理的 JSON 数据列，仅 Postgres 适用,Sequelize.JSONB()                        |
-| NOW      | 一个表示当前时间戳的默认值,Sequelize.NOW()                                            |
-| UUID     | UUID 类型列，其默认值可以为 UUIDV1 或 UUIDV4，Sequelize.UUID()                        |
-| ENUM     | 枚举类型,Sequelize.ENUM()                                                             |
-| ARRAY    | 数组类型，仅 Postgres 适用,Sequelize.ARRAY()                                          |
+        | 类型     | 说明                                                                                  |
+        | -------- | ------------------------------------------------------------------------------------- |
+        | STRING   | 将字段指定为变长字符串类型，默认长度为 255。Sequelize.STRING(64)                      |
+        | CHAR     | 将字段指定为定长字符串类型，默认长度为 255。Sequelize.CHAR(64)                        |
+        | TEXT     | 将字段指定为(无)有限长度的文本列。可用长度：tiny, medium, long,Sequelize.TEXT('tiny') |
+        | INTEGER  | 32 位整型，可用属性：UNSIGNED,ZEROFILL，Sequelize.INTEGER('UNSIGNED')                 |
+        | BOOLEAN  | 小数，接受一个或两个参数表示精度，Sequelize.BOOLEAN()                                 |
+        | TIME     | 指定为时间类型列，Sequelize.TIME()                                                    |
+        | DATE     | 指定为日期时间类型列,Sequelize.DATE()                                                 |
+        | DATEONLY | 指定为日期类型列,Sequelize.DATEONLY()                                                 |
+        | HSTORE   | 指定为键/值类型列，仅 Postgres 适用,Sequelize.HSTORE()                                |
+        | JSON     | 指定为 JSON 字符串类型列，仅 Postgres 适用,Sequelize.JSON()                           |
+        | JSONB    | 指定为预处理的 JSON 数据列，仅 Postgres 适用,Sequelize.JSONB()                        |
+        | NOW      | 一个表示当前时间戳的默认值,Sequelize.NOW()                                            |
+        | UUID     | UUID 类型列，其默认值可以为 UUIDV1 或 UUIDV4，Sequelize.UUID()                        |
+        | ENUM     | 枚举类型,Sequelize.ENUM()                                                             |
+        | ARRAY    | 数组类型，仅 Postgres 适用,Sequelize.ARRAY()                                          |
 
 > Model 进行二次设置
 
@@ -87,40 +87,40 @@ const AaronTest = sequelize.define('project', {
 
 > Model validate 属性
 
-| 字段           | 说明                       | 值类型 |
-| -------------- | -------------------------- | ------ |
-| is             | 存储值必须满足正则         | 正则   |
-| not            | 除正则之外的值             | 布尔   |
-| isEmail        | 是否为邮箱                 | 布尔   |
-| isUrl          | 检查 Url 格式              | 布尔   |
-| isIP           | 检查 IPv4 或 IPv6 格式     | 布尔   |
-| isIPv4         | 检查 IPv4                  | 布尔   |
-| isIPv6         | 检查 IPv6                  | 布尔   |
-| isAlpha        | 不能使用字母               | 布尔   |
-| isAlphanumeric | 只允许字母数字字符         | 布尔   |
-| isNumeric      | 只能使用数字               | 布尔   |
-| isInt          | 只能是整数                 | 布尔   |
-| isFloat        | 只能是浮点数               | 布尔   |
-| isDecimal      | 检查数字                   | 布尔   |
-| isLowercase    | 检查小写字母               | 布尔   |
-| isUppercase    | 检查大写字母               | 布尔   |
-| notNull        | 不允许 null                | 布尔   |
-| isNull         | 只能为 null                | 布尔   |
-| notEmpty       | 不能空字符串               | 布尔   |
-| equals         | 只能使用指定值             | 字符串 |
-| contains       | 必须包含子字符串           | 字符串 |
-| notIn          | 不能是数组中的任意一个值   | 数组   |
-| isIn           | 只能是数组中的任意一个值   | 数组   |
-| notContains    | 不能包含子字符串           | 字符串 |
-| len            | 值的长度必在 2 和 10 之间  | 数组   |
-| isUUID         | 只能是 UUID                | 数字   |
-| isDate         | 只能是日期字符串           | 布尔   |
-| isAfter        | 只能使用指定日期之后的时间 | 字符串 |
-| isBefore:      | 只能使用指定日期之前的时间 | 字符串 |
-| max            | 允许的最大值               | 数字   |
-| min            | 允许的最小值               | 数字   |
-| isArray        | 不能使用数组               | 布尔   |
-| isCreditCard   | 检查是有效的信用卡         | 布尔   |
+        | 字段           | 说明                       | 值类型 |
+        | -------------- | -------------------------- | ------ |
+        | is             | 存储值必须满足正则         | 正则   |
+        | not            | 除正则之外的值             | 布尔   |
+        | isEmail        | 是否为邮箱                 | 布尔   |
+        | isUrl          | 检查 Url 格式              | 布尔   |
+        | isIP           | 检查 IPv4 或 IPv6 格式     | 布尔   |
+        | isIPv4         | 检查 IPv4                  | 布尔   |
+        | isIPv6         | 检查 IPv6                  | 布尔   |
+        | isAlpha        | 不能使用字母               | 布尔   |
+        | isAlphanumeric | 只允许字母数字字符         | 布尔   |
+        | isNumeric      | 只能使用数字               | 布尔   |
+        | isInt          | 只能是整数                 | 布尔   |
+        | isFloat        | 只能是浮点数               | 布尔   |
+        | isDecimal      | 检查数字                   | 布尔   |
+        | isLowercase    | 检查小写字母               | 布尔   |
+        | isUppercase    | 检查大写字母               | 布尔   |
+        | notNull        | 不允许 null                | 布尔   |
+        | isNull         | 只能为 null                | 布尔   |
+        | notEmpty       | 不能空字符串               | 布尔   |
+        | equals         | 只能使用指定值             | 字符串 |
+        | contains       | 必须包含子字符串           | 字符串 |
+        | notIn          | 不能是数组中的任意一个值   | 数组   |
+        | isIn           | 只能是数组中的任意一个值   | 数组   |
+        | notContains    | 不能包含子字符串           | 字符串 |
+        | len            | 值的长度必在 2 和 10 之间  | 数组   |
+        | isUUID         | 只能是 UUID                | 数字   |
+        | isDate         | 只能是日期字符串           | 布尔   |
+        | isAfter        | 只能使用指定日期之后的时间 | 字符串 |
+        | isBefore:      | 只能使用指定日期之前的时间 | 字符串 |
+        | max            | 允许的最大值               | 数字   |
+        | min            | 允许的最小值               | 数字   |
+        | isArray        | 不能使用数组               | 布尔   |
+        | isCreditCard   | 检查是有效的信用卡         | 布尔   |
 
 ## 许可协议
 
