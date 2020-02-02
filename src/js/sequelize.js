@@ -34,6 +34,8 @@ const AaronTest = sequelize.define('project3', TableStructure, {
 });
 AaronTest.sync();
 
+const AaronTest2 = sequelize.import('../model/Table1.js');
+AaronTest2.sync();
 
 sequelize
     .authenticate()
