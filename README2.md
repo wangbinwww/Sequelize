@@ -21,10 +21,12 @@ by [Well-BoB](https://github.com/wangbinwww/Sequelize)
 **发现任何问题欢迎帮忙完善。**
 
 - [说明](README.md)
-- [L1](mqtt/03-ControlPackets.md) - [L1.1 ](mqtt/0301-CONNECT.md) - [L1.2 CONNACK – 确认连接请求](mqtt/0302-CONNACK.md)
-- [L2](mqtt/04-OperationalBehavior.md)
-- [L3](mqtt/05-Security.md)
-- [L4](mqtt/06-WebSocket.md)
+- [L1](README.md)
+  - [L1.1 ](README.md)
+  - [L1.2 CONNACK – 确认连接请求](README.md)
+- [L2](README.md)
+- [L3](README.md)
+- [L4](README.md)
 
 ---
 
@@ -32,10 +34,10 @@ by [Well-BoB](https://github.com/wangbinwww/Sequelize)
 
 > 建议使用 GitBook 版本
 
-| 文档        | 连接                                                             |
-| ----------- | ---------------------------------------------------------------- |
-| 中文版 HTML | [A]](http://mcxiaoke.github.io/mqtt/protocol/MQTT-3.1.1-CN.html) |
-| 中文版 PDF  | [A](http://mcxiaoke.github.io/mqtt/protocol/MQTT-3.1.1-CN.pdf)   |
+| 文档        | 连接                                                               |
+| ----------- | ------------------------------------------------------------------ |
+| 中文版 HTML | [链接](http://mcxiaoke.github.io/mqtt/protocol/MQTT-3.1.1-CN.html) |
+| 中文版 PDF  | [链接](http://mcxiaoke.github.io/mqtt/protocol/MQTT-3.1.1-CN.pdf)  |
 
 ## 许可协议
 
@@ -46,10 +48,10 @@ by [Well-BoB](https://github.com/wangbinwww/Sequelize)
 ## 联系方式
 
 - Github: <https://github.com/wangbinwww/Sequelize>
-- Email: [13331036973@163.COM]()
+- Email: [13331036973@163.com](mailto:github#mcxiaoke.com)
 
 ## 其它
 
-- MQTT Monitor: <https://github.com/mcxiaoke/mqtt-monitor>
+- Github: <https://github.com/wangbinwww/Sequelize>
 
 ---
