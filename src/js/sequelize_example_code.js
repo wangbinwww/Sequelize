@@ -28,7 +28,7 @@ const sequelize = new Sequelize('TestDB', 'sa', 'Icon2019', mssqlConfig);
 //定义模型结构
 //属性
 const TableStructure = {
-    //Sequelize 在数据库中期望一个名为 users 的表,其中包含 firstName 和 lastName 字段. 默认情况下,表名自动复数(在当下使用inflection 库来执行此操作).
+    //Sequelize 在数据库中期望一个名为 user 的表,其中包含 ID 和 Name 字段. 默认情况下,表名自动复数(在当下使用inflection 库来执行此操作).
     ID: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -58,22 +58,22 @@ const TableSequelize = {
         type: Sequelize.STRING,
         allowNull: false
     },
-    create_time: {
+    createdAt: {
         type: Sequelize.DATE,
         get() {
-            return moment(this.getDataValue('create_time')).format('YYYY-MM-DD HH:mm:ss');
+            return moment(this.getDataValue('createdAt')).format('YYYY-MM-DD HH:mm:ss');
         }
     },
-    update_time: {
+    updatedAt: {
         type: Sequelize.DATE,
         get() {
-            return moment(this.getDataValue('update_time')).format('YYYY-MM-DD HH:mm:ss');
+            return moment(this.getDataValue('updatedAt')).format('YYYY-MM-DD HH:mm:ss');
         }
     }
 }
 //sequelize.define
 //方法接收三个参数，第一个参数为表名称，第二个为所需要创建的数据库字段，第三个参数是相关表配置。
-const AaronTest = sequelize.define('User', TableStructure, TableSequelize)
+const UserTest = sequelize.define('User', TableStructure, TableSequelize)
 
 //测试链接
 sequelize
@@ -86,7 +86,7 @@ sequelize
     });
 
 //条件查询数据库
-AaronTest.findAndCountAll({
+UserTest.findAndCountAll({
         where: {
             // Name: "王彬"
         },
@@ -106,7 +106,7 @@ AaronTest.findAndCountAll({
         //sequelize.close()
     });
 //查询单条数据
-AaronTest.findOne({
+UserTest.findOne({
     where: {
         Name: '刘康'
     },
@@ -122,18 +122,43 @@ AaronTest.findOne({
 //将模型与数据库同步
 //如果你希望 Sequelize 根据你的模型定义自动创建表(或根据需要进行修改),你可以使用sync方法,如下所示:
 // 注意:如果表已经存在,使用`force:true`将删除该表
-AaronTest.sync();
-
-AaronTest.sync({
+//1
+UserTest.sync()
+//2 注意:如果表已经存在,使用`force:true`将删除该表
+UserTest.sync({
     force: true
-});
-
-AaronTest.sync({
+})
+//3 一次同步所有模型
+sequelize.sync()
+//4 注意:如果表已经存在,使用`force:true`将删除该表
+UserTest.sync({
     force: true
 }).then(() => {
     // 现在数据库中的 `users` 表对应于模型定义
-    return AaronTest.create({
+    return UserTest.create({
         firstName: 'John',
         lastName: 'Hancock'
     });
 });
+
+//更新数据
+var TcreatedAt = new Date();
+var TupdatedAt = new Date();
+
+UserTest.update({
+        createdAt: TcreatedAt,
+        updatedAt: TupdatedAt
+    }, {
+        where: {
+            ID: 1
+        }
+    }).then(function (result) {
+        // success
+        console.log(result);
+        //sequelize.close()
+    })
+    .catch(function (error) {
+        // error
+        console.log(error);
+        //sequelize.close()
+    });

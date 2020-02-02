@@ -27,7 +27,11 @@ const sequelize = new Sequelize('TestDB', 'sa', 'Icon2019', mssqlConfig);
 //----------------------
 //定义模型结构
 const TableStructure = {
-    ID: Sequelize.INTEGER,
+    ID: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true, //主键
+    },
     Name: Sequelize.STRING,
     PassWord: Sequelize.TEXT,
     createdAt: Sequelize.DATE,
@@ -50,47 +54,35 @@ const TableSequelize = {
         type: Sequelize.STRING,
         allowNull: false
     },
-    create_time: {
+    createdAt: {
         type: Sequelize.DATE,
-        get() {
-            return moment(this.getDataValue('create_time')).format('YYYY-MM-DD HH:mm:ss');
-        }
+        createdAt: new Date()
     },
-    update_time: {
+    updatedAt: {
         type: Sequelize.DATE,
-        get() {
-            return moment(this.getDataValue('update_time')).format('YYYY-MM-DD HH:mm:ss');
-        }
+        updatedAt: new Date()
     }
 }
 //sequelize.define
 //方法接收三个参数，第一个参数为表名称，第二个为所需要创建的数据库字段，第三个参数是相关表配置。
-const AaronTest = sequelize.define('User', TableStructure, TableSequelize)
+const UserTest = sequelize.define('User', TableStructure, TableSequelize)
 
 //更新数据
-var TcreatedAt = {
-    get() {
-        return moment(this.getDataValue('update_time')).format('YYYY-MM-DD HH:mm:ss');
-    }
-};
-var TupdatedAt = {
-    get() {
-        return moment(this.getDataValue('create_time')).format('YYYY-MM-DD HH:mm:ss');
-    }
-};
 
-AaronTest.update({
-    createdAt: 'createdAt',
-    title: `createdAt | 20200202`
-
-}, {
-    where: {
-        //createdAt: ''
-    }
-}).then((result) => {
-    console.log('已执行!')
-    console.log(result)
-}).catch((error) => {
-    console.log('错误!')
-    console.log(error)
-})
+UserTest.update({
+        createdAt: new Date(),
+        updatedAt: new Date()
+    }, {
+        where: {
+            ID: 1
+        }
+    }).then(function (result) {
+        // success
+        console.log(result);
+        //sequelize.close()
+    })
+    .catch(function (error) {
+        // error
+        console.log(error);
+        //sequelize.close()
+    });

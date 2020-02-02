@@ -65,38 +65,21 @@ const TableSequelize = {
 }
 //sequelize.define
 //方法接收三个参数，第一个参数为表名称，第二个为所需要创建的数据库字段，第三个参数是相关表配置。
-const UserTest = sequelize.define('User', TableStructure, TableSequelize)
+const UserTest = sequelize.define('User909877', TableStructure, TableSequelize)
 
-//条件查询数据库
-UserTest.findAndCountAll({
-        where: {
-            // Name: "王彬"
-        },
-        limit: 10,
-        offset: 0,
-        raw: true,
-        attributes: ["ID", "Name", 'PassWord', 'createdAt', 'updatedAt'] //  需要查询出的字段
-    })
-    .then(function (result) {
-        // success
-        console.log(result);
-        //sequelize.close()
-    })
-    .catch(function (error) {
-        // error
-        console.log(error);
-        //sequelize.close()
-    });
-
-//查询单条数据
-UserTest.findOne({
-    where: {
-        Name: '刘康'
-    },
-    raw: true,
-    attributes: ["id", "Name"]
-}).then((result) => {
-    console.log(result)
-}).catch((error) => {
-    console.log(error)
+//1
+UserTest.sync()
+//2
+UserTest.sync({
+    force: true
 })
+//3
+UserTest.sync({
+    force: true
+}).then(() => {
+    // 现在数据库中的 `users` 表对应于模型定义
+    return UserTest.create({
+        firstName: 'John',
+        lastName: 'Hancock'
+    });
+});

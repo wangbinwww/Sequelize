@@ -34,10 +34,12 @@ const TableStructure = {
         primaryKey: true, //主键
     },
     Name: Sequelize.STRING,
-    PassWord: Sequelize.TEXT
+    PassWord: Sequelize.TEXT,
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE,
 }
 //创建模型(表)
-const AaronTest = sequelize.define('User', TableStructure, {
+const UserTest = sequelize.define('User', TableStructure, {
     timestamps: false,
     freezeTableName: true, //禁止修改表名字
     ID: {
@@ -54,37 +56,31 @@ const AaronTest = sequelize.define('User', TableStructure, {
         allowNull: false
     },
     freezeTableName: true, //禁止修改表名字
-    create_time: {
+    createdAt: {
         type: Sequelize.DATE,
-        get() {
-            return moment(this.getDataValue('create_time')).format('YYYY-MM-DD HH:mm:ss');
-        }
+        createdAt: new Date()
     },
-    update_time: {
+    updatedAt: {
         type: Sequelize.DATE,
-        get() {
-            return moment(this.getDataValue('update_time')).format('YYYY-MM-DD HH:mm:ss');
-        }
+        updatedAt: new Date()
     }
 });
 
-//需要查询出的字段
-AaronTest.findAndCountAll({
-        where: {
-            //Name: "王彬"
-        },
-        limit: 10,
-        offset: 0,
-        raw: true,
-        attributes: ["ID", "Name"] //  需要的字段
-    })
-    .then(function (result) {
+// 创建新数据(增加新行)
+UserTest.create({
+        ID: null,
+        Name: '李健楠',
+        PassWord: '12345678',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    }).then(function (result) {
         // success
-        console.log(result);
-        sequelize.close()
+        //console.log(result);
+        console.log(" UserTest Name:", result.Name);
+        //sequelize.close()
     })
     .catch(function (error) {
         // error
         console.log(error);
-        sequelize.close()
+        //sequelize.close()
     });
