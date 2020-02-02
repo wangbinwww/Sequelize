@@ -18,7 +18,6 @@ module.exports = {
     target: "node",
     plugins: [
         new CleanWebpackPlugin(),
-
     ],
     // optimization: {
     //     minimize: true, //混淆
