@@ -252,22 +252,26 @@ AaronTest.findOne({
 
 > 更新(Update)
 
-```groovy
-  AaronTest.update({
-      description: '前端部',
-      title: `前端 | ${Math.random()}`
-  }, {
-      where: {
-          description: "网络部"
-      }
-  }).then((result) => {
-      console.log(result)
-  }).catch((error) => {
-      console.log(error)
+```js
+AaronTest.update(
+  {
+    description: "前端部",
+    title: `前端 | ${Math.random()}`
+  },
+  {
+    where: {
+      description: "网络部"
+    }
+  }
+)
+  .then(result => {
+    console.log(result);
   })
-  //修改数据可以直接调用静态的update方法，通过where条件查询，对其搜索到的数据进行查询，并对查询到的数据进行更改。
-  //该方法修改所有查询的到的数据，返回结果为数组形式，数据只有一个值，也就是数组的第0项，则是N条数据修改成功。
-
+  .catch(error => {
+    console.log(error);
+  });
+//修改数据可以直接调用静态的update方法，通过where条件查询，对其搜索到的数据进行查询，并对查询到的数据进行更改。
+//该方法修改所有查询的到的数据，返回结果为数组形式，数据只有一个值，也就是数组的第0项，则是N条数据修改成功。
 ```
 
 > 删除(Delete)
