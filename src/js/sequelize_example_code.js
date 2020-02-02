@@ -16,26 +16,33 @@ const mssqlConfig = {
     omitNull: false, //  null 是否通过SQL语句查询
     timezone: '+08:00' //  解决时差 - 默认存储时间存在8小时误差
 };
+
+//----------------------
 //创建链接池
 const sequelize = new Sequelize('TestDB', 'sa', 'Icon2019', mssqlConfig);
 
+//----------------------
 //定义模型数据
 var qtt = {};
 qtt.Name = 'sql';
 qtt.PassWord = '7788';
 console.log(qtt);
 
+//----------------------
 //定义project3模型结构
 const TableStructure = {
     name: Sequelize.STRING,
     password: Sequelize.TEXT
 }
-//创建模型
+
+//----------------------
+//创建模型(表)
 const AaronTest = sequelize.define('project3', TableStructure, {
     timestamps: false,
 });
 //将project3同步到数据库
 AaronTest.sync();
+//----------------------
 
 //方法 2  js 引入一个模型并创建
 const AaronTest2 = sequelize.import('../model/Table1.js');
@@ -49,3 +56,5 @@ sequelize
     .catch(err => {
         console.error('无法连接到数据库:', err);
     });
+
+//----------------------

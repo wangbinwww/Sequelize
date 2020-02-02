@@ -5,6 +5,8 @@
 //     })
 // }
 
+
+//创建project9999表
 module.exports = function (sequelize, DataTypes) {
     const TableStructure = {
         name: DataTypes.STRING,
