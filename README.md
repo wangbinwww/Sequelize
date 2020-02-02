@@ -12,15 +12,15 @@ by [Well-BoB](https://github.com/wangbinwww/Sequelize)
 
 - [项目文档](https://github.com/wangbinwww/Sequelize)
 
-## 准备工作
+## 初始化项目
 
-1.使用 'npm install' 命令初始化项目
+- 1.使用 'npm install' 命令初始化项目
 
 ## 目录
 
 **发现任何问题欢迎帮忙完善。**
 
-- [说明](README.md)
+- [L0](README.md)
 - [L1](README.md)
   - [L1.1 ](README.md)
   - [L1.2 ](README.md)
@@ -44,23 +44,23 @@ const AaronTest = sequelize.define('project', {
 })
 ```
 
-| 类型        | 说明                                                               |
-| ----------- | ------------------------------------------------------------------ |
-|STRING| 将字段指定为变长字符串类型，默认长度为 255。Sequelize.STRING(64)|
-|CHAR| 将字段指定为定长字符串类型，默认长度为 255。Sequelize.CHAR(64)|
-|TEXT|将字段指定为(无)有限长度的文本列。可用长度：tiny, medium, long,Sequelize.TEXT('tiny')|
-|INTEGER|32 位整型，可用属性：UNSIGNED,ZEROFILL，Sequelize.INTEGER('UNSIGNED')|
-|BOOLEAN|小数，接受一个或两个参数表示精度，Sequelize.BOOLEAN()|
-|TIME|指定为时间类型列，Sequelize.TIME()|
-|DATE|指定为日期时间类型列,Sequelize.DATE()|
-|DATEONLY|指定为日期类型列,Sequelize.DATEONLY()|
-|HSTORE|指定为键/值类型列，仅 Postgres 适用,Sequelize.HSTORE()|
-|JSON|指定为 JSON 字符串类型列，仅 Postgres 适用,Sequelize.JSON()|
-|JSONB|指定为预处理的 JSON 数据列，仅 Postgres 适用,Sequelize.JSONB()|
-|NOW|一个表示当前时间戳的默认值,Sequelize.NOW()|
-|UUID|UUID 类型列，其默认值可以为 UUIDV1 或 UUIDV4，Sequelize.UUID()|
-|ENUM|枚举类型,Sequelize.ENUM()|
-|ARRAY|数组类型，仅 Postgres 适用,Sequelize.ARRAY()|
+| 类型     | 说明                                                                                  |
+| -------- | ------------------------------------------------------------------------------------- |
+| STRING   | 将字段指定为变长字符串类型，默认长度为 255。Sequelize.STRING(64)                      |
+| CHAR     | 将字段指定为定长字符串类型，默认长度为 255。Sequelize.CHAR(64)                        |
+| TEXT     | 将字段指定为(无)有限长度的文本列。可用长度：tiny, medium, long,Sequelize.TEXT('tiny') |
+| INTEGER  | 32 位整型，可用属性：UNSIGNED,ZEROFILL，Sequelize.INTEGER('UNSIGNED')                 |
+| BOOLEAN  | 小数，接受一个或两个参数表示精度，Sequelize.BOOLEAN()                                 |
+| TIME     | 指定为时间类型列，Sequelize.TIME()                                                    |
+| DATE     | 指定为日期时间类型列,Sequelize.DATE()                                                 |
+| DATEONLY | 指定为日期类型列,Sequelize.DATEONLY()                                                 |
+| HSTORE   | 指定为键/值类型列，仅 Postgres 适用,Sequelize.HSTORE()                                |
+| JSON     | 指定为 JSON 字符串类型列，仅 Postgres 适用,Sequelize.JSON()                           |
+| JSONB    | 指定为预处理的 JSON 数据列，仅 Postgres 适用,Sequelize.JSONB()                        |
+| NOW      | 一个表示当前时间戳的默认值,Sequelize.NOW()                                            |
+| UUID     | UUID 类型列，其默认值可以为 UUIDV1 或 UUIDV4，Sequelize.UUID()                        |
+| ENUM     | 枚举类型,Sequelize.ENUM()                                                             |
+| ARRAY    | 数组类型，仅 Postgres 适用,Sequelize.ARRAY()                                          |
 
 ## 许可协议
 
