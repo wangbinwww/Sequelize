@@ -34,14 +34,18 @@ by [Well-BoB](https://github.com/wangbinwww/Sequelize)
 
 > 常用类型
 
-```groovy
+```js
 // app.js
-const AaronTest = sequelize.define('project', {
-  title: Sequelize.STRING,
-  description: Sequelize.TEXT
-},{
-  timestamps: false
-})
+const AaronTest = sequelize.define(
+  "project",
+  {
+    title: Sequelize.STRING,
+    description: Sequelize.TEXT
+  },
+  {
+    timestamps: false
+  }
+);
 ```
 
 | 类型     | 说明                                                                                  |
@@ -134,105 +138,116 @@ CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Upda
 创建数据的方法有很多种，这里简单的介绍一些常用的：
 先创建数据实例，然后调用实例的 save 方法，完成数据存储。
 
-```groovy
+```js
 //第一种：
 //save方法
-  const Aaron = AaronTest.build({
-      'title': `后端 | ${Math.random()}`,
-      'description': '技术部'
-  });
-  Aaron.save().then((result) => {
-      //  成功
-      console.log(result)
-  }).catch((error) => {
-      //  失败
-      console.log(error)
+const Aaron = AaronTest.build({
+  title: `后端 | ${Math.random()}`,
+  description: "技术部"
+});
+Aaron.save()
+  .then(result => {
+    //  成功
+    console.log(result);
   })
+  .catch(error => {
+    //  失败
+    console.log(error);
+  });
 
 //第二种：
 //通过静态create方法
-  const user = AaronTest.create({
-    'title': `前端 | ${Math.random()}`,
-    'description': '网络部'
-}).then(function (result) {
+const user = AaronTest.create({
+  title: `前端 | ${Math.random()}`,
+  description: "网络部"
+})
+  .then(function(result) {
     //  成功
-    console.log(result)
-}).catch(function (error) {
+    console.log(result);
+  })
+  .catch(function(error) {
     //  失败
-    console.log(error)
-});
+    console.log(error);
+  });
 ```
 
 > 读取(Read)
 
-```groovy
-
-  AaronTest.findAll({
-      where: {
-          description: '网络部'
-      },
-      limit: 10, //  查询多少条
-      offset: 0, //  查询开始位置
-      raw: true
-  }).then(function (result) {
-      // success
-      console.log(result)
-  }).catch(function (error) {
-      // error
-      console.log(error)
+```js
+AaronTest.findAll({
+  where: {
+    description: "网络部"
+  },
+  limit: 10, //  查询多少条
+  offset: 0, //  查询开始位置
+  raw: true
+})
+  .then(function(result) {
+    // success
+    console.log(result);
+  })
+  .catch(function(error) {
+    // error
+    console.log(error);
   });
-  //通过上述方法创建的数据可以直接作为返回结果返回给前台，如果想对其操作需要在参数中添加row:true属性
-  //添加row:true返回的则是一个没有被包装过的数组了。在项目过程中需要查询一下当前所查询的数据共有多少条返回给前端。
+//通过上述方法创建的数据可以直接作为返回结果返回给前台，如果想对其操作需要在参数中添加row:true属性
+//添加row:true返回的则是一个没有被包装过的数组了。在项目过程中需要查询一下当前所查询的数据共有多少条返回给前端。
 
-  AaronTest.count({
-      where: {
-          description: '网络部'
-      }
-  }).then().then(function (result) {
-      // success
-      console.log(result)
-  }).catch(function (error) {
-      // error
-      console.log(error)
+AaronTest.count({
+  where: {
+    description: "网络部"
+  }
+})
+  .then()
+  .then(function(result) {
+    // success
+    console.log(result);
+  })
+  .catch(function(error) {
+    // error
+    console.log(error);
   });
-  //通过上面的方法则可以查询到总数
+//通过上面的方法则可以查询到总数
 
-  AaronTest.findAndCountAll({
-      where: {
-          description: '网络部'
-      },
-      limit: 10,
-      offset: 0,
-      raw: true,
-      attributes: ["id", "title"] //  需要查询出的字段
-  }).then(function (result) {
-      // success
-      console.log(result)
-  }).catch(function (error) {
-      // error
-      console.log(error)
+AaronTest.findAndCountAll({
+  where: {
+    description: "网络部"
+  },
+  limit: 10,
+  offset: 0,
+  raw: true,
+  attributes: ["id", "title"] //  需要查询出的字段
+})
+  .then(function(result) {
+    // success
+    console.log(result);
+  })
+  .catch(function(error) {
+    // error
+    console.log(error);
   });
-  //添加row:true返回的则是一个没有被包装过的数组了。在项目过程中需要查询一下当前所查询的数据共
-  //有多少条返回给前端。
-  //通过上面的方法则可以查询到总数以及条件范围内的数据，一举两得。查询结果返回的是一个json对象，
-  //其包括cont和rows两个属性，分别是总数和数据。很舒服有没有。
-
+//添加row:true返回的则是一个没有被包装过的数组了。在项目过程中需要查询一下当前所查询的数据共
+//有多少条返回给前端。
+//通过上面的方法则可以查询到总数以及条件范围内的数据，一举两得。查询结果返回的是一个json对象，
+//其包括cont和rows两个属性，分别是总数和数据。很舒服有没有。
 ```
 
 **查询单条数据**
 
-```groovy
-  AaronTest.findOne({
-      where: {
-          id: 6
-      },
-      raw: true,
-      attributes: ["id", "title"]
-  }).then((result) => {
-      console.log(result)
-  }).catch((error) => {
-      console.log(error)
+```js
+AaronTest.findOne({
+  where: {
+    id: 6
+  },
+  raw: true,
+  attributes: ["id", "title"]
+})
+  .then(result => {
+    console.log(result);
   })
+  .catch(error => {
+    console.log(error);
+  });
 ```
 
 > 更新(Update)
@@ -257,16 +272,18 @@ CRUD：是指在做计算处理时的增加(Create)、读取(Read)、更新(Upda
 
 > 删除(Delete)
 
-```groovy
+```js
 AaronTest.destroy({
-    where: {
-        description: "UI部",
-    }
-}).then(function (result) {
-    console.log(result)
-}).catch(function (error) {
-    console.log(error)
-});
+  where: {
+    description: "UI部"
+  }
+})
+  .then(function(result) {
+    console.log(result);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
 //删除操作通过destroy方法，同样也是通过where条件查询，对所查询数据进行删除。
 //当删除成功后，返回结果为Number，删除多少条数据，如果没有删除则会返回0。此方法属于物理删除，
 //删除后无法进行恢复。
@@ -284,20 +301,22 @@ sequelize.query()进行基于 SQL 语句的原始查询。上面用到的是 Mod
 查询时，如果只需要查询模型的部分属性，可以在通过在查询选项中指定 attributes 实现。该选项是一个
 数组参数，在数组中指定要查询的属性即可，这个字段在上面进行查询的时候已经使用过了。
 
-```groovy
+```js
 //查询属性（字段）可以通过传入一个嵌套数据进行重命名，这里需要强调一下重命名所指的是对查询出的数
 //据键值进行重命名处理，而不是更改数据表中的字段名称。
 AaronTest.findOne({
-    where: {
-        id: 2
-    },
-    attributes: ["id", ["title", "t"]],
-    raw: true
-}).then((result) => {
-    console.log(result)
-}).catch((error) => {
-    console.log(error)
+  where: {
+    id: 2
+  },
+  attributes: ["id", ["title", "t"]],
+  raw: true
 })
+  .then(result => {
+    console.log(result);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 //  注意这里t ↓
 //  { id: 2, t: '前端 | 0.8765218593370694' }
 ```
@@ -310,20 +329,22 @@ AaronTest.findOne({
 
 where 的基础用法也就向上面那样，针对某些特定的条件进行查询处理。
 
-```groovy
+```js
 AaronTest.findOne({
-    where: {
-        id: 2
-    },
-    attributes: {
-        exclude: ['id']
-    },
-    raw: true
-}).then((result) => {
-    console.log(result)
-}).catch((error) => {
-    console.log(error)
+  where: {
+    id: 2
+  },
+  attributes: {
+    exclude: ["id"]
+  },
+  raw: true
 })
+  .then(result => {
+    console.log(result);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 ```
 
 就像上面那样简单的查询无法满足所有的业务需求，Sequelize 还提供了操作符以满足更多的查询条件，
@@ -353,13 +374,13 @@ $like: { $any: ['cat', 'hat']}  // 像任何数组['cat'， 'hat'] -也适用于
 
 在进行列表查询时，不能把查询道德所有数据全部返回出去，需要对数据进行分页处理。
 
-```groovy
+```js
 // 获取 10 条数据（实例）
-AaronTest.findAll({ limit: 10 })
+AaronTest.findAll({ limit: 10 });
 // 跳过 8 条数据（实例）
-AaronTest.findAll({ offset: 8 })
+AaronTest.findAll({ offset: 8 });
 // 跳过 5 条数据并获取其后的 5 条数据（实例）
-AaronTest.findAll({ offset: 5, limit: 5 })
+AaronTest.findAll({ offset: 5, limit: 5 });
 ```
 
 > 查询排序
@@ -367,7 +388,7 @@ AaronTest.findAll({ offset: 5, limit: 5 })
 order 选项用于查询结果的排序数据。排序时应该传入一个包含属性-排序方向的元组/数组，以保证正确的
 转义：
 
-```groovy
+```js
 AaronTest.findAll({
     order: [
         // 转义 username 并对查询结果按 DESC 方向排序
@@ -403,16 +424,19 @@ AaronTest.findAll({
 - 如果传递一个数组，? 会按数组的顺序被依次替换
 - 巢传递一个对象，:key 将会用对象的键替换。如果对象中未找到指定键，则会引发异常（反之亦然）
 
-```groovy
+```js
 //  这里是sequelize，并不是model
-sequelize.query('SELECT * FROM projects WHERE id = ?', {
-    replacements: ['active'],
+sequelize
+  .query("SELECT * FROM projects WHERE id = ?", {
+    replacements: ["active"],
     type: sequelize.QueryTypes.SELECT
-}).then((result) => {
-    console.log(result)
-}).catch((error) => {
-    console.log(error)
-})
+  })
+  .then(result => {
+    console.log(result);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 ```
 
 ## 许可协议
