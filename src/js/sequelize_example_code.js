@@ -142,12 +142,10 @@ UserTest.sync({
 });
 
 //更新数据
-var TcreatedAt = new Date();
-var TupdatedAt = new Date();
 
 UserTest.update({
-        createdAt: TcreatedAt,
-        updatedAt: TupdatedAt
+        createdAt: new Date(),
+        updatedAt: new Date()
     }, {
         where: {
             ID: 1
@@ -155,6 +153,23 @@ UserTest.update({
     }).then(function (result) {
         // success
         console.log(result);
+        //sequelize.close()
+    })
+    .catch(function (error) {
+        // error
+        console.log(error);
+        //sequelize.close()
+    });
+
+// 删除 ID = 7 的行
+UserTest.destroy({
+        where: {
+            ID: '7'
+        }
+    }).then(function (result) {
+        // success
+        //console.log(result);
+        console.log(" UserTest ID:", result.ID);
         //sequelize.close()
     })
     .catch(function (error) {
