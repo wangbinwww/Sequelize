@@ -18,7 +18,7 @@ by [Well-BoB](https://github.com/wangbinwww/Sequelize)
 
 ## 目录
 
-**发现任何翻译问题或格式问题欢迎提 PR 帮忙完善。**
+**发现任何问题欢迎帮忙完善。**
 
 - [说明](README.md)
 - [L1](mqtt/03-ControlPackets.md) - [L1.1 ](mqtt/0301-CONNECT.md) - [L1.2 CONNACK – 确认连接请求](mqtt/0302-CONNACK.md)
