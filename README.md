@@ -30,7 +30,7 @@ by [Well-BoB](https://github.com/wangbinwww/Sequelize)
 
 ---
 
-## 其它文档
+## 说明、参数文档
 
 > 常用类型
 
@@ -61,6 +61,17 @@ const AaronTest = sequelize.define('project', {
 | UUID     | UUID 类型列，其默认值可以为 UUIDV1 或 UUIDV4，Sequelize.UUID()                        |
 | ENUM     | 枚举类型,Sequelize.ENUM()                                                             |
 | ARRAY    | 数组类型，仅 Postgres 适用,Sequelize.ARRAY()                                          |
+
+> model 进行二次设置
+
+- timestamps:不要添加时间戳属性 (updatedAt, createdAt)
+- paranoid:paranoid 属性只在启用 timestamps 时适用,不从数据库中删除数据，而只是增加一个 deletedAt 标识当前时间,我们常说的逻辑删除
+- underscored: 不使用驼峰式命令规则，这样会在使用下划线分隔，updatedAt 的字段名会是 updated_at
+- freezeTableName：禁止修改表名. 默认情况下 sequelize 会自动使用传入的模型名（define 的第一个参数）做为表名，如果你不想使用这种方式你需要进行以下设置
+- tableName：定义表名
+- createdAt：不想使用 createdAt
+- updatedAt：想 updatedAt 的实际名为'\*'
+- deletedAt: 要将 deletedAt 设置为 destroyTime (注意要启用 paranoid)
 
 ## 许可协议
 
