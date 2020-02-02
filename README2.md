@@ -4,7 +4,7 @@
 
 根据文章的步骤一步一步学习使用 Sequelize 链接 mssql 的功能.
 
-by [Well-BoB](http:\www.sispower.com)
+by [Well-BoB](http://www.sispower.com)
 
 **最新版本: v1 2020.02.02**
 
